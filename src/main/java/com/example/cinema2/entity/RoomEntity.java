@@ -2,11 +2,14 @@ package com.example.cinema2.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class RoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +18,9 @@ public class RoomEntity {
     private String name;
 
     private Long totalSeats;
+
+    @OneToMany
+    private List<SeatEntity> seats;
 
     @OneToOne
     private FilmEntity film;

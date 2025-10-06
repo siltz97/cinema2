@@ -6,9 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RoomDto {
+public class SeatDto {
 
-    private String name;
+    private String seatNumber;
 
-    private Long totalSeats;
+    private boolean occupied;
+
 }

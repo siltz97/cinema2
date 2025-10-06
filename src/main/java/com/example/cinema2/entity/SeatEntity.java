@@ -1,29 +1,27 @@
 package com.example.cinema2.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@Entity
 @Getter
 @Setter
-public class TicketEntity {
+@Entity
+public class SeatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String seatNumber;
 
-    private String hash;
-
-    @OneToOne
-    private SeatEntity seat;
-
-   @ManyToOne
-   private RoomEntity room;
+    private boolean occupied = false;
 
     @ManyToOne
-    private FilmEntity film;
+    private RoomEntity room;
+
+    @OneToOne
+    private TicketEntity ticket;
+
 }

@@ -2,15 +2,18 @@ package com.example.cinema2.dto;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class TicketDto {
-
-    private String rowLetter;
-
-    private Long columnNumber;
+    private String seatNumber;
 
     private String roomName;
 
     private String filmName;
+
+
+
 }
