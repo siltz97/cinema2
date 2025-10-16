@@ -13,7 +13,6 @@ public class RoomServiceImpl implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    @Transactional
     public void save(RoomEntity roomEntity) {
         roomRepository.save(roomEntity);
     }
