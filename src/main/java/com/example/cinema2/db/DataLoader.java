@@ -1,9 +1,6 @@
 package com.example.cinema2.db;
 
-import com.example.cinema2.entity.FilmEntity;
-import com.example.cinema2.entity.RoomEntity;
-import com.example.cinema2.entity.SeatEntity;
-import com.example.cinema2.entity.UserEntity;
+import com.example.cinema2.entity.*;
 import com.example.cinema2.repo.*;
 import com.example.cinema2.utility.TicketUtility;
 import lombok.AllArgsConstructor;
@@ -32,6 +29,8 @@ public class DataLoader implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @Override
@@ -73,11 +72,17 @@ public class DataLoader implements CommandLineRunner {
         room.setSeats(seats);
         roomRepository.save(room);
 
+        RoleEntity role = new RoleEntity();
+        role.setRole("ROLE_OPERATOR");
+        roleRepository.save(role);
         UserEntity serhii = new UserEntity();
         serhii.setUsername("Serhii");
         serhii.setPassword(passwordEncoder.encode("123"));
-        serhii.setRole("admin");
+        serhii.setRoles(List.of(role));
         userRepository.save(serhii);
+
+
+
 
         //------------------
 //        Comparator<Integer> comparator = (o1, o2) -> o2.compareTo(o1);
