@@ -7,12 +7,6 @@ import com.example.cinema2.utility.TicketUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-
 
 @Service
 public class TicketServiceImpl implements TicketService {

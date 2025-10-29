@@ -2,17 +2,14 @@ package com.example.cinema2.db;
 
 import com.example.cinema2.entity.*;
 import com.example.cinema2.repo.*;
-import com.example.cinema2.utility.TicketUtility;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -31,6 +28,8 @@ public class DataLoader implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
 
     @Override
@@ -72,14 +71,47 @@ public class DataLoader implements CommandLineRunner {
         room.setSeats(seats);
         roomRepository.save(room);
 
-        RoleEntity role = new RoleEntity();
-        role.setRole("ROLE_OPERATOR");
-        roleRepository.save(role);
+        RoleEntity roleOperator = new RoleEntity();
+        RoleEntity roleManager = new RoleEntity();
+        RoleEntity roleUser = new RoleEntity();
+
+        roleOperator.setRole("OPERATOR");
+        roleManager.setRole("MANAGER");
+        roleUser.setRole("USER");
+        roleRepository.save(roleUser);
+        roleRepository.save(roleManager);
+        roleRepository.save(roleOperator);
+
+        AuthorityEntity read = new AuthorityEntity();
+        read.setAuthName("READ");
+        authorityRepository.save(read);
+        AuthorityEntity write = new AuthorityEntity();
+        write.setAuthName("WRITE");
+        authorityRepository.save(write);
+
         UserEntity serhii = new UserEntity();
         serhii.setUsername("Serhii");
         serhii.setPassword(passwordEncoder.encode("123"));
-        serhii.setRoles(List.of(role));
+        serhii.setRoles(List.of(roleOperator));
+        serhii.setAuthorities(List.of(read));
         userRepository.save(serhii);
+
+        UserEntity caren = new UserEntity();
+        caren.setUsername("Caren");
+        caren.setPassword(passwordEncoder.encode("123"));
+        caren.setRoles(List.of(roleManager));
+        caren.setAuthorities(List.of(read,write));
+        userRepository.save(caren);
+
+        UserEntity jack = new UserEntity();
+        jack.setUsername("Jack");
+        jack.setPassword(passwordEncoder.encode("123"));
+        jack.setRoles(List.of(roleUser));
+        userRepository.save(jack);
+
+
+
+
 
 
 

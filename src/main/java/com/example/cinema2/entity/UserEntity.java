@@ -18,6 +18,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<AuthorityEntity> authorities;
 }

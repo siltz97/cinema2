@@ -1,13 +1,12 @@
 package com.example.cinema2.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class RoomDto {
+public class AuthorityDto {
 
-    private String name;
-
-    private Long totalSeats;
+    private String authName;
 }
