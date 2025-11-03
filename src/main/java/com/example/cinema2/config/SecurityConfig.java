@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/h2-console/**", "/public/**", "/css/**", "/js/**").permitAll()
+                                .requestMatchers("/", "/h2-console/**","/swagger-ui/**","/v3/api-docs/**", "/public/**", "/css/**", "/js/**").permitAll()
                                 .requestMatchers("/operator/**").hasRole("OPERATOR")
                                 .anyRequest().authenticated())
                 .csrf(csrf -> {

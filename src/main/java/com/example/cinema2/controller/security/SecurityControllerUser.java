@@ -12,7 +12,7 @@ public class SecurityControllerUser {
     public String home() {
         return "home";
     }
-
+    @PreAuthorize("hasRole('OPERATOR') and hasAuthority('READ')")
     @GetMapping("/operator")
     public String operator(){
         return "operator";
@@ -29,4 +29,5 @@ public class SecurityControllerUser {
     public String manager_write(){
         return "manager_write";
     }
+
 }
