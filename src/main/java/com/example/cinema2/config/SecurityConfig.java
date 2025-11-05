@@ -33,10 +33,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/", "/h2-console/**","/swagger-ui/**","/v3/api-docs/**", "/public/**", "/css/**", "/js/**").permitAll()
                                 .requestMatchers("/operator/**").hasRole("OPERATOR")
+                                .requestMatchers("/schedule/**").hasRole("USER")
                                 .anyRequest().authenticated())
                 .csrf(csrf -> {
                     csrf.ignoringRequestMatchers("/h2-console/**");

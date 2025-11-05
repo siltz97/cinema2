@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,11 +44,13 @@ public class DataLoader implements CommandLineRunner {
         film.setName("Film1");
         film.setDuration(200L);
         film.setType3D(false);
+        film.setEndTime(LocalDateTime.now().minusDays(1L));
         film.setRoom(room);
 
         filmRepository.save(film);
 
         room.setFilm(film);
+
 
         int num = 0;
         int letter= 0;
@@ -70,6 +73,14 @@ public class DataLoader implements CommandLineRunner {
         }
         room.setSeats(seats);
         roomRepository.save(room);
+
+        TicketEntity ticket = new TicketEntity();
+        ticket.setSeat(seats.get(0));
+        ticket.setSeatNumber(String.valueOf(ticket.getSeatNumber()));
+        ticket.setRoom(room);
+        ticket.setFilm(film);
+        ticketRepository.save(ticket);
+
 
         RoleEntity roleOperator = new RoleEntity();
         RoleEntity roleManager = new RoleEntity();

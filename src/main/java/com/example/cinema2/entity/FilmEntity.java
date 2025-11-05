@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,8 @@ public class FilmEntity {
     private boolean type3D;
 
     private Long duration;
+
+    private LocalDateTime endTime;
 
     @OneToOne
     private RoomEntity room;
