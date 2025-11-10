@@ -4,7 +4,7 @@ import com.example.cinema2.entity.*;
 import com.example.cinema2.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -25,8 +25,8 @@ public class DataLoader implements CommandLineRunner {
     private SeatRepository seatRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -75,7 +75,7 @@ public class DataLoader implements CommandLineRunner {
         roomRepository.save(room);
 
         TicketEntity ticket = new TicketEntity();
-        ticket.setSeat(seats.get(0));
+        ticket.setSeat(seats.getFirst());
         ticket.setSeatNumber(String.valueOf(ticket.getSeatNumber()));
         ticket.setRoom(room);
         ticket.setFilm(film);
@@ -102,21 +102,21 @@ public class DataLoader implements CommandLineRunner {
 
         UserEntity serhii = new UserEntity();
         serhii.setUsername("Serhii");
-        serhii.setPassword(passwordEncoder.encode("123"));
+        serhii.setPassword("123");
         serhii.setRoles(List.of(roleOperator));
         serhii.setAuthorities(List.of(read));
         userRepository.save(serhii);
 
         UserEntity caren = new UserEntity();
         caren.setUsername("Caren");
-        caren.setPassword(passwordEncoder.encode("123"));
+        caren.setPassword("123");
         caren.setRoles(List.of(roleManager));
         caren.setAuthorities(List.of(read,write));
         userRepository.save(caren);
 
         UserEntity jack = new UserEntity();
         jack.setUsername("Jack");
-        jack.setPassword(passwordEncoder.encode("123"));
+        jack.setPassword("123");
         jack.setRoles(List.of(roleUser));
         userRepository.save(jack);
 
