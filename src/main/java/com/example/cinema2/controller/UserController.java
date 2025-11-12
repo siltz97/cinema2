@@ -42,5 +42,14 @@ public class UserController {
     @GetMapping("/cache")
     public void cache() {
        cacheInspector.printCacheContent();
+        System.out.println("---------");
+       cacheInspector.debugCache();
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String username,@RequestParam String password) {
+        userService.login(username, password);
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 }

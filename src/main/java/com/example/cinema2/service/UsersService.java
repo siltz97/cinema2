@@ -7,7 +7,7 @@ public interface UsersService {
     void getUsers(Long time);
     UserEntity addUser(UserEntity user);
     void deleteUser(Long id);
-    UserEntity updateUser(UserEntity user);
+    boolean updateUser(UserEntity user);
     UserEntity getUserById(Long id);
 
 }
